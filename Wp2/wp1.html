@@ -1,0 +1,69 @@
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+<script>
+	function my_submit() {
+        console.log(document.getElementById("Name").value);
+		var apigClient = apigClientFactory.newClient();
+		var params = {
+        //This is where any header, path, or querystring request params go. The key is the parameter named as defined in the API
+              //param0 : document.getElementById("Name").value,
+              //param1:document.getElementById("PhoneNumber").value
+	       }  ;
+	
+	var body = {
+    //This is where you define the body of the request
+             'message': {'Name':document.getElementById("Name").value , 'PhoneNumber':document.getElementById("PhoneNumber").value , 'Photo':getUrlVars()["photo"]}
+        }
+	var additionalParams = {
+    
+    }
+    console.log(body)
+    apigClient.namephonePost(params, body, additionalParams)
+    .then(function(result){
+        console.log(result)
+        document.getElementById("demo").innerHTML =result.data.body;
+    }).catch( function(result){
+        //This is where you would put an error callback
+        console.log(result)
+    });
+};
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
+
+</script>
+<html>
+<body>
+
+
+<br>
+Name: <input type="text" id="Name" ><br>
+<br>
+PhoneNumber: <input type="text" id="PhoneNumber" ><br>
+<br>
+
+<input type="submit" value="Submit" onclick="my_submit()">
+
+<strong><p id ='demo'></p></strong>
+<strong><p id ='demo1'></p></strong>
+
+
+
+</body>
+</html>
