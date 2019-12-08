@@ -1,4 +1,4 @@
-# Smart-Home-
+# Smart-Home
 Implemented a system where house owners can get insights about person at the doorstep wherein, I used Kinesis for handling real stream data, Rekognition for recognizing users and created REST API service using API Gateway to interact with owner/user
 Technologies used:
 1. AWS - Kinesis
